@@ -11,19 +11,21 @@ export default Ember.Route.extend({
 			let titleURL= cleanURI(title);
 			let uid = get(this,'session.uid');
 			let date = new Date();
-			let post = this.store.createRecord('post',{
-				title: title,
-				body: body,
-				author: 'test',
-				titleURL:titleURL,
-				date: date 
+			let student = this.store.createRecord('student',{
+				name: title,
+			  github: body,
+			  cohort: '50',
+			  remotePrep: 'titleURL',
+			  fulcrum: 'many',
+			  interview: 'yes',
+			  date: date,
 			});
 
 			user = getOrCreateUser(uid,get(this,'session.currentUser.username'), 
 								   get(this,'session.currentUser.profileImageURL'), 
 								   this.store);
 			user.then((userData)=>{
-				userData.get('posts').addObject(post);
+				userData.get('posts').addObject(student);
 				post.save().then(()=> {
 					return userData.save();
 				});
