@@ -5,9 +5,6 @@ export default Ember.Route.extend({
 	beforeModel(){
 		return get(this,'session').fetch().catch(function(){});
 	},
-	model(){
-		return this.store.findAll('post');
-	},
 	actions:{
 		login(){
 			get(this,'session').open('firebase', { provider: 'github'}).then(function(data) {
